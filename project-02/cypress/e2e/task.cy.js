@@ -15,4 +15,21 @@ describe('task management', () => {
     cy.get('.modal').should('not.exist')
   })
 
+  it('should create a new task', () => {
+    const name = 'New Task'
+    const description = 'New Task'
+
+    cy.visit('http://localhost:5173')
+    cy.get('button').contains('Add Task').click()
+    cy.get('#title').type(name)
+    cy.get('#summary').type(description)
+    cy.get('.modal').contains('Add Task').click()
+    cy.get('.backdrop').should('not.exist')
+    cy.get('.modal').should('not.exist')
+    cy.get('.task').should('have.length', 1)
+    cy.get('.task h2').contains(name)
+    cy.get('.task p').contains(description)
+
+  })
+
 })
