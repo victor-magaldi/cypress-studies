@@ -55,4 +55,27 @@ describe('task management', () => {
     cy.get('#filter').select('urgent');
     cy.get('.task').should('have.length', 1);
   });
+
+  it('should add multiple tasks', () => {
+    const tasks = [
+      { name: 'Task 1', description: 'description 1', category: 'urgent' },
+      { name: 'Task 2', description: 'description 2', category: 'moderate' },
+    ];
+
+    cy.visit('http://localhost:5173');
+
+    tasks.forEach((task) => {
+      cy.get('button').contains('Add Task').click();
+      cy.get('#title').type(task.name);
+      cy.get('#summary').type(task.description);
+      cy.get('#category').select(task.category);
+      cy.get('.modal').contains('Add Task').click();
+    });
+
+    cy.get('.task').should('have.length', 2);
+    cy.get('.task').eq(0).contains(tasks[0].name);
+    cy.get('.task').eq(0).contains(tasks[0].description);
+    cy.get('.task').eq(1).contains(tasks[1].name);
+    cy.get('.task').eq(1).contains(tasks[1].description);
+  });
 });
