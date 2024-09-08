@@ -32,4 +32,12 @@ describe('task management', () => {
 
   })
 
+  it('should validate user input', () => {
+    cy.visit('http://localhost:5173')
+    cy.get('button').contains('Add Task').click()
+    cy.get('.modal').contains('Add Task').click()
+    cy.get('.modal').contains('Add Task').click()
+    cy.get('.modal').contains('Please provide values for task title')
+  })
+
 })
