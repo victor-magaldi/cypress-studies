@@ -6,14 +6,19 @@ describe('contact form', () => {
     );
     cy.get('[data-cy="contact-input-name"]').type('John Doe');
     cy.get('[data-cy="contact-input-email"]').type('test@example.com');
-    cy.get('[data-cy="contact-btn-submit"]')
+
+    // const submitBtn = cy.get('[data-cy="contact-btn-submit"]'); // não recomendado, pois não é retornado o btn
+    // o Cypress considera a variável como uma repetição de teste e não é uma variável
+    // para funciona precisará usar alias
+
+    cy.get('[data-cy="contact-btn-submit"]').as('submitBtn');
+    cy.get('@submitBtn')
       .contains('Send Message')
       .and('not.have.attr', 'disabled'); // or should, 'and' improve readability
-    cy.get('[data-cy="contact-btn-submit"]').click();
-    cy.get('[data-cy="contact-btn-submit"]')
-      .contains('Sending...')
-      .should('have.attr', 'disabled'); // or .and('be.disabled')
+    cy.get('@submitBtn').click();
+    cy.get('@submitBtn').contains('Sending...').should('have.attr', 'disabled'); // or .and('be.disabled')
+
     cy.wait(1000);
-    cy.get('[data-cy="contact-btn-submit"]').contains('Send Message');
+    cy.get('@submitBtn').contains('Send Message');
   });
 });
