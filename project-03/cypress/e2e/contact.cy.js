@@ -15,14 +15,8 @@ describe('contact form', () => {
     cy.get('@submitBtn')
       .contains('Send Message')
       .and('not.have.attr', 'disabled'); // or should, 'and' improve readability
-    cy.get('@submitBtn')
-      .click()
-      .then((el) => {
-        // then consegue recupera o estado após a ação anterior
-        expect(el.text()).contains('Sending...'); // é necessário usar expect dentro do Then, uma função global
-        expect(el).disabled;
-      });
-    // cy.get('@submitBtn').contains('Sending...').should('have.attr', 'disabled'); // or .and('be.disabled')
+    cy.get('@submitBtn').click();
+    cy.get('@submitBtn').contains('Sending...').should('have.attr', 'disabled'); // or .and('be.disabled')
 
     cy.wait(1000);
     cy.get('@submitBtn').contains('Send Message');
