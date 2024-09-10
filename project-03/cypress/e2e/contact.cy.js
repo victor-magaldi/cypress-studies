@@ -24,30 +24,35 @@ describe('contact form', () => {
 
   it('should validate the form input', () => {
     cy.visit('http://localhost:5173/about');
-    cy.get('[data-cy="contact-btn-submit"]')
+    cy.get('[data-cy="contact-btn-submit"]').as('submitBtn');
+    cy.get('@submitBtn')
       .click()
       .then((el) => {
         expect(el).to.not.have.attr('disabled');
         expect(el.text()).to.not.eq('Sending...');
       });
 
-    cy.get('[data-cy="contact-btn-submit"]').contains('Send Message');
-    cy.get('[data-cy="contact-input-message"]').blur();
-    cy.get('[data-cy="contact-input-message"]')
+    cy.get('@submitBtn').contains('Send Message');
+
+    cy.get('[data-cy="contact-input-message"]').as('messageInput');
+    cy.get('@messageInput').blur();
+    cy.get('@messageInput')
       .parent()
       .then((el) => {
         expect(el.attr('class')).to.contains('invalid');
       });
 
-    cy.get('[data-cy="contact-input-name"]').focus().blur(); // forçar o novo focus para depois realizar o blur
-    cy.get('[data-cy="contact-input-name"]')
+    cy.get('[data-cy="contact-input-name"]').as('msgInput');
+    cy.get('@msgInput').focus().blur(); // forçar o novo focus para depois realizar o blur
+    cy.get('@msgInput')
       .parent()
       .then((el) => {
         expect(el.attr('class')).to.contains('invalid');
       });
 
-    cy.get('[data-cy="contact-input-email"]').focus().blur();
-    cy.get('[data-cy="contact-input-email"]')
+    cy.get('[data-cy="contact-input-email"]').as('emailInput');
+    cy.get('@emailInput').focus().blur();
+    cy.get('@emailInput')
       .parent()
       .then((el) => {
         expect(el.attr('class')).to.contains('invalid');
