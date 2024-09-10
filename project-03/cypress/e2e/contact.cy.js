@@ -21,4 +21,16 @@ describe('contact form', () => {
     cy.wait(1000);
     cy.get('@submitBtn').contains('Send Message');
   });
+
+  it('should validate the form input', () => {
+    cy.visit('http://localhost:5173/about');
+    cy.get('[data-cy="contact-btn-submit"]')
+      .click()
+      .then((el) => {
+        expect(el).to.not.have.attr('disabled');
+        expect(el.text()).to.not.eq('Sending...');
+      });
+
+    cy.get('[data-cy="contact-btn-submit"]').contains('Send Message');
+  });
 });
