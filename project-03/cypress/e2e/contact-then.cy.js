@@ -22,8 +22,6 @@ describe('contact form', () => {
         expect($updatedSubmitBtn).to.have.attr('disabled');
       });
 
-      cy.wait(1000);
-
       cy.get('@submitBtn').then(($finalSubmitBtn) => {
         expect($finalSubmitBtn).to.contain('Send Message');
         expect($finalSubmitBtn).to.not.have.attr('disabled');

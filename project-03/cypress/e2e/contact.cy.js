@@ -18,7 +18,6 @@ describe('contact form', () => {
     cy.get('@submitBtn').click();
     cy.get('@submitBtn').contains('Sending...').should('have.attr', 'disabled'); // or .and('be.disabled')
 
-    cy.wait(1000);
     cy.get('@submitBtn').contains('Send Message');
   });
 
