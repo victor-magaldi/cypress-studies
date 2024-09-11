@@ -3,7 +3,10 @@ describe('contact form', () => {
     cy.visit('/about');
   });
   it('should submit form', () => {
-    cy.getByIdCy('contact-input-message').type('Hello, this is my message');
+    cy.task('seedDatabase', 'fileName.csv').then((value) => {
+      //use Value
+    });
+    cy.getByIdCy('contact-input-message').type('Hello, this is my message'); // this is Custom query in suppport/commands.js
     cy.getByIdCy('contact-input-name').type('John Doe');
     cy.get('[data-cy="contact-input-email"]').type('test@example.com');
 
