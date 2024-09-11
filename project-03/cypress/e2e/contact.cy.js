@@ -37,16 +37,20 @@ describe('contact form', () => {
     cy.get('@messageInput').blur();
     cy.get('@messageInput')
       .parent()
+      .should('exist')
       .then((el) => {
-        expect(el.attr('class')).to.contains('invalid');
+        cy.wrap(el)
+          .should('have.attr', 'class')
+          .and('match', /invalid/);
       });
-
     cy.get('[data-cy="contact-input-name"]').as('msgInput');
     cy.get('@msgInput').focus().blur(); // forçar o novo focus para depois realizar o blur
     cy.get('@msgInput')
       .parent()
       .then((el) => {
-        expect(el.attr('class')).to.contains('invalid');
+        cy.wrap(el)
+          .should('have.attr', 'class')
+          .and('match', /invalid/);
       });
 
     cy.get('[data-cy="contact-input-email"]').as('emailInput');
@@ -54,7 +58,9 @@ describe('contact form', () => {
     cy.get('@emailInput')
       .parent()
       .then((el) => {
-        expect(el.attr('class')).to.contains('invalid');
+        cy.wrap(el)
+          .should('have.attr', 'class')
+          .and('match', /invalid/);
       });
   });
 });
