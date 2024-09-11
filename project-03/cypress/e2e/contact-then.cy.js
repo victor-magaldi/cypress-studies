@@ -1,4 +1,4 @@
-describe('contact form', () => {
+describe('contact form', { defaultCommandTimeout: 450 }, () => {
   it('should submit form', () => {
     cy.visit('http://localhost:5173/about');
 
