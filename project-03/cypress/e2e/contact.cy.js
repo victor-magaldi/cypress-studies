@@ -52,7 +52,7 @@ describe('contact form', () => {
           .should('have.attr', 'class')
           .and('match', /invalid/);
       });
-
+    cy.screenshot();
     cy.get('[data-cy="contact-input-email"]').as('emailInput');
     cy.get('@emailInput').focus().blur();
     cy.get('@emailInput')
