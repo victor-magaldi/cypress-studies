@@ -1,6 +1,8 @@
 describe('contact form', () => {
-  it('should submit form', () => {
+  beforeEach(() => {
     cy.visit('/about');
+  });
+  it('should submit form', () => {
     cy.get('[data-cy="contact-input-message"]').type(
       'Hello, this is my message'
     );
@@ -22,7 +24,6 @@ describe('contact form', () => {
   });
 
   it('should validate the form input', () => {
-    cy.visit('http://localhost:5173/about');
     cy.get('[data-cy="contact-btn-submit"]').as('submitBtn');
     cy.get('@submitBtn')
       .click()
