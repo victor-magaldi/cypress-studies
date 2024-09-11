@@ -3,10 +3,8 @@ describe('contact form', () => {
     cy.visit('/about');
   });
   it('should submit form', () => {
-    cy.get('[data-cy="contact-input-message"]').type(
-      'Hello, this is my message'
-    );
-    cy.get('[data-cy="contact-input-name"]').type('John Doe');
+    cy.getByIdCy('contact-input-message').type('Hello, this is my message');
+    cy.getByIdCy('contact-input-name').type('John Doe');
     cy.get('[data-cy="contact-input-email"]').type('test@example.com');
 
     // const submitBtn = cy.get('[data-cy="contact-btn-submit"]'); // não recomendado, pois não é retornado o btn
