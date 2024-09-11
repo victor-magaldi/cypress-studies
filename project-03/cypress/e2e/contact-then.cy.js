@@ -15,12 +15,14 @@ describe('contact form', () => {
       expect($submitBtn).to.contain('Send Message'); // é necessário usar expect dentro do Then, um função global
       expect($submitBtn).to.not.have.attr('disabled');
 
-      cy.wrap($submitBtn).click();
+      cy.wrap($submitBtn)
+        .click()
+        .then(($updatedSubmitBtn) => {
+          expect($updatedSubmitBtn).to.contain('Sending...');
+          expect($updatedSubmitBtn).to.have.attr('disabled');
+        });
 
-      cy.get('@submitBtn').then(($updatedSubmitBtn) => {
-        expect($updatedSubmitBtn).to.contain('Sending...');
-        expect($updatedSubmitBtn).to.have.attr('disabled');
-      });
+      cy.wait(1000);
 
       cy.get('@submitBtn').then(($finalSubmitBtn) => {
         expect($finalSubmitBtn).to.contain('Send Message');
