@@ -17,7 +17,9 @@ describe('contact form', () => {
     cy.get('@submitBtn')
       .contains('Send Message')
       .and('not.have.attr', 'disabled'); // or should, 'and' improve readability
-    cy.get('@submitBtn').click();
+
+    cy.submitFormContact(); // this command is custom in suppport/commands.js
+    // cy.get('@submitBtn').click();
     cy.get('@submitBtn').contains('Sending...').should('have.attr', 'disabled'); // or .and('be.disabled')
     cy.wait(1000);
     cy.get('@submitBtn').contains('Send Message');
