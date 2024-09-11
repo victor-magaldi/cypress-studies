@@ -1,6 +1,6 @@
 describe('contact form', { defaultCommandTimeout: 450 }, () => {
   it('should submit form', () => {
-    cy.visit('http://localhost:5173/about');
+    cy.visit('/about');
 
     cy.get('[data-cy="contact-input-message"]').type(
       'Hello, this is my message'

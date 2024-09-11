@@ -1,6 +1,6 @@
 describe('contact form', () => {
   it('should submit form', () => {
-    cy.visit('http://localhost:5173/about');
+    cy.visit('/about');
     cy.get('[data-cy="contact-input-message"]').type(
       'Hello, this is my message'
     );
@@ -17,7 +17,7 @@ describe('contact form', () => {
       .and('not.have.attr', 'disabled'); // or should, 'and' improve readability
     cy.get('@submitBtn').click();
     cy.get('@submitBtn').contains('Sending...').should('have.attr', 'disabled'); // or .and('be.disabled')
-
+    cy.wait(1000);
     cy.get('@submitBtn').contains('Send Message');
   });
 
