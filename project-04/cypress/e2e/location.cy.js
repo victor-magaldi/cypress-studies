@@ -13,6 +13,9 @@ describe('share location', () => {
             });
           }, 100);
         });
+      cy.stub(win.navigator.clipboard, 'writeText')
+        .as('saveToClipboard')
+        .resolves();
     });
   });
   it('should fetch the user location', () => {
@@ -24,8 +27,9 @@ describe('share location', () => {
   });
 
   it('should share a location URL', () => {
-    cy.visit('/');
     cy.get('[data-cy="name-input"').type('John Doe');
     cy.get('[data-cy="get-loc-btn"').click();
+    cy.get('[data-cy="share-loc-btn"').click();
+    cy.get('@saveToClipboard').should('have.been.called');
   });
 });
