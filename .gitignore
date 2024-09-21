@@ -13,10 +13,18 @@ bower_components
 
 **/cypress/screenshots/
 **/cypress/videos/
+**/.cache/*
 *.sublime*
 
 psd
 thumb
 sketch
 
+
+# Remix cache
+**/.cache/
+
+# Remix build artifacts
+**/build/
+**/public/build/
 # End of https://www.toptal.com/developers/gitignore/api/react
