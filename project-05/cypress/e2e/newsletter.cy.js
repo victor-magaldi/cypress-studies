@@ -14,4 +14,14 @@ describe('Newsletter', () => {
     cy.wait('@subscribe'); // await intercept with dummy data
     cy.contains('Thanks for signing up!');
   });
+  it('should display validation errors', () => {
+    cy.intercept('POST', '/newsletter*', {
+      body: { message: 'Email exists already.' },
+    }).as('subscribe'); // dummy response
+    cy.visit('/');
+    cy.get('[data-cy="newsletter-email"]').type('test@example.com');
+    cy.get('[data-cy="newsletter-submit"]').click();
+    cy.wait('@subscribe'); // await intercept with dummy data
+    cy.contains('Email exists already.');
+  });
 });
